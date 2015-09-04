@@ -1,0 +1,8 @@
+{{contributor.login}}
+<img {{bind-attr src=contributor.avatarUrl}}/>
+
+<br>
+
+{{#each repository in repositories}}
+  {{repository.name}}<br>
+{{/each}}
