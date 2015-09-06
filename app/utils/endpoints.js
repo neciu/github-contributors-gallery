@@ -11,6 +11,12 @@ export default {
     return GITHUB_API_ROOT + 'users/' + login;
   },
   contributorsRepositories: function (login) {
-    return GITHUB_API_ROOT + 'users/' + login + '/repos';
+    return GITHUB_API_ROOT + 'users/' + login + '/repos?type=all';
+  },
+  repository: function (ownerLogin, name) {
+    return GITHUB_API_ROOT + 'repos/' + ownerLogin + '/' + name;
+  },
+  repositoryContributors: function (ownerLogin, name) {
+    return GITHUB_API_ROOT + 'repos/' + ownerLogin + '/' + name + '/contributors';
   }
 }

@@ -1,0 +1,7 @@
+<h1>{{repository.name}}</h1>
+
+{{#each contributor in contributors}}
+  {{#link-to 'contributor' contributor.login}}
+      <p>{{contributor.login}}</p>
+  {{/link-to}}
+{{/each}}

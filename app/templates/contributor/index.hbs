@@ -4,5 +4,7 @@
 <br>
 
 {{#each repository in repositories}}
-  {{repository.name}}<br>
+  {{#link-to 'repository' repository.ownerLogin repository.name}}
+    {{repository.name}}<br>
+  {{/link-to}}
 {{/each}}

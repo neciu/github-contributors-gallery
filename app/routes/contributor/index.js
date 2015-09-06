@@ -12,8 +12,6 @@ export default Ember.Route.extend({
   },
 
   setupController: function (controller, model) {
-    console.log(model);
-
     controller.setProperties({
       contributor: dataSerializers.contributor(controller.store, model.contributor),
       repositories: model.repositories.map(function(repositoryData){

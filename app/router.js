@@ -10,7 +10,10 @@ Router.map(function () {
   this.route('authenticating');
   this.route('authenticated');
   this.route('contributor', function () {
-    this.route('index', {path: ':login'});
+    this.route('index', {path: ':login/'});
+  });
+  this.route('repository', function () {
+    this.route('index', {path: ':login/:name/'});
   });
 });
 

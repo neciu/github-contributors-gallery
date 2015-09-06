@@ -30,10 +30,11 @@ export default {
   },
 
   repository: function (store, rawData) {
-    return upsert(store, 'contributor', {
+    return upsert(store, 'repository', {
       id: rawData.id,
       name: rawData.name,
-      fullName: rawData.full_name
+      fullName: rawData.full_name,
+      ownerLogin: rawData.owner.login
     });
   }
 }
