@@ -10,12 +10,13 @@ export default Ember.Route.extend({
   setupController: function () {
     var route = this;
     Ember.$
-      .get('http://localhost:3000/auth/', {
+      .get('http://github-contributors-gallery.herokuapp.com/auth/', {
         client_id: environment.githubApplicationClientId,
         code: this.get('code')
       })
       .then(function (response) {
         route.controllerFor('application').set('accessToken', response);
+        route.transitionTo('authenticated');
       });
   }
 });
