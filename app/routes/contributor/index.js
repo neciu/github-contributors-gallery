@@ -1,12 +1,13 @@
 import Ember from 'ember';
+import authenticatedRequest from '../../utils/authenticated-request'
 import endpoints from '../../utils/endpoints'
 import dataSerializers from '../../utils/data-serializers'
 
 export default Ember.Route.extend({
   model: function (params) {
     return Ember.RSVP.hash({
-      contributor: Ember.$.get(endpoints.contributor(params.login)),
-      repositories: Ember.$.get(endpoints.contributorsRepositories(params.login))
+      contributor: authenticatedRequest(endpoints.contributor(params.login), 'GET'),
+      repositories: authenticatedRequest(endpoints.contributorsRepositories(params.login), 'GET')
     });
   },
 
