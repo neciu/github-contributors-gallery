@@ -6,7 +6,10 @@ export default {
     return upsert(store, 'contributor', {
       id: rawData.id,
       login: rawData.login,
-      avatarUrl: rawData.avatar_url
+      avatarUrl: rawData.avatar_url,
+      numberOfPublicRepositories: rawData.public_repos,
+      numberOfPublicGists: rawData.public_gists,
+      numberOfFollowers: rawData.followers
 
 
       //login": "antingshen",

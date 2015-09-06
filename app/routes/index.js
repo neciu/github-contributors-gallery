@@ -14,5 +14,12 @@ export default Ember.Route.extend(authenticatedRoute, {
       return dataSerializers.contributor(controller.store, contributorData)
     });
     controller.set('contributors', contributors);
+
+    contributors.forEach(function (contributor) {
+      authenticatedRequest(endpoints.contributor(contributor.get('login')), 'GET')
+        .then(function (response) {
+          dataSerializers.contributor(controller.store, response);
+        });
+    });
   }
 });
