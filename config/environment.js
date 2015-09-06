@@ -43,5 +43,7 @@ module.exports = function(environment) {
 
   }
 
+  ENV.githubApplicationClientId = '71eeb513d5c2b90f0ca5';
+
   return ENV;
 };

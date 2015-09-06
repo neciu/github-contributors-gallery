@@ -6,6 +6,9 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function () {
+  this.route('not-authenticated');
+  this.route('authenticating');
+  this.route('authenticated');
   this.route('contributor', function () {
     this.route('index', {path: ':login'});
   });

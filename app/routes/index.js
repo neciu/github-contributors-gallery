@@ -1,8 +1,9 @@
 import Ember from 'ember';
+import authenticatedRoute from '../mixins/authenticated-route';
 import endpoints from '../utils/endpoints'
 import dataSerializers from '../utils/data-serializers'
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(authenticatedRoute, {
   model: function () {
     return Ember.$.get(endpoints.contributors());
   },
