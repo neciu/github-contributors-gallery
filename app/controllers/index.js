@@ -8,6 +8,8 @@ export default Ember.Controller.extend({
   numberOfPublicRepositoriesFilterAmount: undefined,
   numberOfPublicGistsAmountInput: undefined,
   numberOfPublicGistsAmount: undefined,
+  numberOfContributionsAmountInput: undefined,
+  numberOfContributionsAmount: undefined,
 
   validateInput: function(inputName, valueName) {
     var value = this.get(inputName);
@@ -32,6 +34,10 @@ export default Ember.Controller.extend({
     this.validateInput('numberOfPublicGistsAmountInput', 'numberOfPublicGistsAmount');
   }.observes('numberOfPublicGistsAmountInput'),
 
+  numberOfContributionsAmountInputChanged: function () {
+    this.validateInput('numberOfContributionsAmountInput', 'numberOfContributionsAmount');
+  }.observes('numberOfContributionsAmountInput'),
+
   filterCriteriaChanged: function () {
     var controller = this;
     function followersCondition(contributor) {
@@ -55,12 +61,19 @@ export default Ember.Controller.extend({
         return true;
       }
     }
+    function contributionsCondition(contributor) {
+      if (controller.get('numberOfContributionsAmount')) {
+        return controller.get('numberOfContributionsAmount') <= contributor.get('numberOfContributions');
+      } else {
+        return true;
+      }
+    }
 
     var filteredContributors = this.get('contributors').filter(function (contributor) {
-      return followersCondition(contributor) && repositoriesCondition(contributor) && gistsCondition(contributor);
+      return followersCondition(contributor) && repositoriesCondition(contributor) && gistsCondition(contributor) && contributionsCondition(contributor);
     });
 
     this.set('filteredContributors', filteredContributors);
 
-  }.observes('numberOfFollowersFilterAmount', 'numberOfPublicRepositoriesFilterAmount', 'numberOfPublicGistsAmount')
+  }.observes('numberOfFollowersFilterAmount', 'numberOfPublicRepositoriesFilterAmount', 'numberOfPublicGistsAmount', 'numberOfContributionsAmount')
 });

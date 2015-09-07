@@ -13,6 +13,10 @@ export default Ember.Route.extend(authenticatedRoute, {
   //},
 
   setupController: function (controller, model) {
+    if (this.controller.get('contributors').length) {
+      return;
+    }
+
     authenticatedRequest(endpoints.allRepositories(), 'GET')
       .then(function (rawRepositories) {
         var repositories = rawRepositories.map(function (repositoryData) {
@@ -22,8 +26,10 @@ export default Ember.Route.extend(authenticatedRoute, {
         repositories.forEach(function (repository) {
           authenticatedRequest(endpoints.repositoryStatistics(repository.get('ownerLogin'), repository.get('name')), 'GET')
             .then(function (response) {
+              console.log(response);
               response.forEach(function (contribution) {
                 var contributor = dataSerializers.contributor(controller.store, contribution.author);
+                contributor.set('numberOfContributions', contributor.get('numberOfContributions') + contribution.total);
                 controller.get('contributors').add(contributor);
                 authenticatedRequest(endpoints.contributor(contributor.get('login')), 'GET')
                   .then(function (response) {
