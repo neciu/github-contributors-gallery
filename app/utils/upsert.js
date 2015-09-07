@@ -1,5 +1,5 @@
 export default function upsert(store, modelName, data) {
-  var item = store.getById(modelName, data.id);
+  var item = store.peekRecord(modelName, data.id);
   if (item) {
     item.setProperties(data);
   } else {

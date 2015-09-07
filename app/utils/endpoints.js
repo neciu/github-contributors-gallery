@@ -4,6 +4,12 @@ var GITHUB_API_ROOT = 'https://api.github.com/';
 var GITHUB_ORGANIZATION_NAME = 'angular';
 
 export default {
+  allRepositories: function() {
+    return GITHUB_API_ROOT + 'users/' + GITHUB_ORGANIZATION_NAME + '/repos';
+  },
+  repositoryStatistics: function(ownerLogin, name) {
+    return GITHUB_API_ROOT + 'repos/' + ownerLogin + '/' + name + '/stats/contributors';
+  },
   contributors: function () {
     return GITHUB_API_ROOT + 'orgs/' + GITHUB_ORGANIZATION_NAME + '/members';
   },

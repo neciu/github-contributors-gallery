@@ -1,5 +1,9 @@
-{{#each contributor in contributors}}
+#followers: {{input value=numberOfFollowersFilterAmountInput}}<br>
+#repositories: {{input value=numberOfPublicRepositoriesFilterAmountInput}}<br>
+#gists: {{input value=numberOfPublicGistsAmountInput}}<br>
+
+{{#each contributor in filteredContributors}}
     {{#link-to 'contributor' contributor.login}}
-        <p>{{contributor.login}}</p>
+        <p>{{contributor.login}}, #f: {{contributor.numberOfFollowers}}, #r: {{contributor.numberOfPublicRepositories}}, #g: {{contributor.numberOfPublicGists}}</p>
     {{/link-to}}
 {{/each}}
