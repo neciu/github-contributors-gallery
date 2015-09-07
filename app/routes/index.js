@@ -22,7 +22,6 @@ export default Ember.Route.extend(authenticatedRoute, {
         var repositories = rawRepositories.map(function (repositoryData) {
           return dataSerializers.repository(controller.store, repositoryData);
         });
-        repositories = [repositories[0], repositories[1]];
         repositories.forEach(function (repository) {
           authenticatedRequest(endpoints.repositoryStatistics(repository.get('ownerLogin'), repository.get('name')), 'GET')
             .then(function (response) {
