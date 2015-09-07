@@ -2,6 +2,11 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   contributors: Ember.Set.create(),
+
+  contributorsChanged: function() {
+    this.set('filteredContributors', this.get('contributors').toArray());
+  }.observes('contributors.[]'),
+
   numberOfFollowersFilterAmountInput: undefined,
   numberOfFollowersFilterAmount: undefined,
   numberOfPublicRepositoriesFilterAmountInput: undefined,

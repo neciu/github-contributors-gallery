@@ -26,7 +26,6 @@ export default Ember.Route.extend(authenticatedRoute, {
         repositories.forEach(function (repository) {
           authenticatedRequest(endpoints.repositoryStatistics(repository.get('ownerLogin'), repository.get('name')), 'GET')
             .then(function (response) {
-              console.log(response);
               response.forEach(function (contribution) {
                 var contributor = dataSerializers.contributor(controller.store, contribution.author);
                 contributor.set('numberOfContributions', contributor.get('numberOfContributions') + contribution.total);
